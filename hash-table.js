@@ -28,7 +28,27 @@ class HashTable {
         if(!this.keyMap[hashed]) return null;
         let looper = this.keyMap[hashed]
         let returnArr = looper.find(element => element[0] === key)
-        return returnArr ? returnArr : null
+        return returnArr ? returnArr[1] : null
+    }
+
+    keys(){
+        let returnArr = []
+        this.keyMap.forEach(element => {
+            if(element.length > 0){
+                element.forEach(sub => returnArr.push(sub[0]))
+            }
+        })
+        return returnArr
+    }
+
+    values(){
+        let returnArr = []
+        this.keyMap.forEach(element => {
+            if(element.length > 0){
+                element.forEach(sub => returnArr.push(sub[1]))
+            }
+        })
+        return returnArr
     }
 }
 
