@@ -33,12 +33,48 @@ class Graph {
         }
         return this.adjacencyList
       }
-      removeVertex(vertex){
+    removeVertex(vertex){
         Object.keys(this.adjacencyList.forEach(element => {
           this.removeEdge(vertex, element)
         }))
         this.adjacencyList[vertex] = null
         return this.adjacencyList
-    }    
+    }
+    
+    dfs(vertex){
+      let resultsList = []
+      let visitedChecker = {}
+      const helper = (vertex) => {
+        if(!vertex) return null;
+        resultsList.push(vertex)
+        visitedChecker[vertex] = true
+        this.adjacencyList[vertex].forEach(neighbor => {
+          if(!visitedChecker[neighbor]){
+            helper(neighbor)
+          }
+        }) 
+      } 
+      helper(vertex)
+      return resultsList
+    } 
+
+    bfs(vertex){
+      let queue = [vertex]
+      let visitedChecker = {}
+      let resultsList = []
+      let currentVertex;
+      visitedChecker[vertex] = true
+       while(queue.length){
+         currentVertex = queue.shift()
+         resultsList.push(currentVertex)
+         this.adjacencyList[currentVertex].forEach(neighbor => {
+           if(!visitedChecker[neighbor]){
+             visitedChecker[neighbor] = true
+             queue.push(neighbor)
+           }
+         })
+       }
+       return resultsList
+    }
 
 }

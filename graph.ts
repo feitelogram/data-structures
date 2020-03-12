@@ -1,6 +1,6 @@
 
 
-class Graph {
+class GraphStructure {
     adjacencyList: {};
 
     constructor(){
